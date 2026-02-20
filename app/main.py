@@ -212,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="#ecosystem">Ecosystem</a>
 <a href="#features">Features</a>
 <a href="https://status.orcest.ai">Status</a>
+<a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">LangChain</a>
 <a href="https://login.orcest.ai" class="nav-cta">Login</a>
 </div>
 </div>
@@ -422,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="footer-section">
 <h4>Resources</h4>
+<a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">LangChain</a>
 <a href="https://status.orcest.ai">System Status</a>
 <a href="https://login.orcest.ai">Authentication</a>
 <a href="/api/info">API Documentation</a>
@@ -610,7 +612,7 @@ a:hover{{text-decoration:underline}}
 <p>Base URL: <code>{RAINYMODEL_BASE_URL}</code></p>
 <p>استفاده با کلید API از داشبورد SSO.</p>
 </div>
-<p><a href="https://orcest.ai">← بازگشت به صفحه اصلی</a> | <a href="https://login.orcest.ai/logout">خروج</a></p>
+<p><a href="https://orcest.ai">← بازگشت به صفحه اصلی</a> | <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">LangChain</a> | <a href="https://login.orcest.ai/logout">خروج</a></p>
 </div></body></html>"""
 
 
