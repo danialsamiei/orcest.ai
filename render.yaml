@@ -27,5 +27,6 @@ services:
     healthCheckPath: /health
 
     envVars:
+      - fromGroup: orcest-ai-shared-apis
       - key: PYTHON_VERSION
         value: "3.12"
