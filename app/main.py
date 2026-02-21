@@ -883,9 +883,82 @@ def _fc_html():
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orcest System Flowchart</title>
+  <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.6.0/dist/panzoom.min.js"></script>
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+
+    function downloadFile(filename, content, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function setupPanZoomAndExports() {
+      const svg = document.querySelector('.mermaid svg');
+      const host = document.getElementById('diagramHost');
+      if (!svg || !host || !window.Panzoom) {
+        return;
+      }
+
+      host.innerHTML = '';
+      host.appendChild(svg);
+      svg.style.width = '100%';
+      svg.style.height = 'auto';
+
+      const panzoom = window.Panzoom(svg, {
+        maxScale: 3.5,
+        minScale: 0.4,
+        step: 0.2,
+      });
+
+      host.addEventListener('wheel', panzoom.zoomWithWheel, { passive: false });
+
+      document.getElementById('zoomInBtn').addEventListener('click', () => panzoom.zoomIn());
+      document.getElementById('zoomOutBtn').addEventListener('click', () => panzoom.zoomOut());
+      document.getElementById('resetBtn').addEventListener('click', () => panzoom.reset());
+
+      document.getElementById('exportSvgBtn').addEventListener('click', () => {
+        const serializer = new XMLSerializer();
+        const svgRaw = serializer.serializeToString(svg);
+        downloadFile('orcest-system-diagram.svg', svgRaw, 'image/svg+xml;charset=utf-8');
+      });
+
+      document.getElementById('exportPngBtn').addEventListener('click', () => {
+        const serializer = new XMLSerializer();
+        const svgRaw = serializer.serializeToString(svg);
+        const svg64 = btoa(unescape(encodeURIComponent(svgRaw)));
+        const image64 = 'data:image/svg+xml;base64,' + svg64;
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width || 1600;
+          canvas.height = img.height || 900;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#0a0a0f';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          const pngUrl = canvas.toDataURL('image/png');
+          const a = document.createElement('a');
+          a.href = pngUrl;
+          a.download = 'orcest-system-diagram.png';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        };
+        img.src = image64;
+      });
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(setupPanZoomAndExports, 350);
+    });
   </script>
   <style>
     body { margin: 0; background: #0a0a0f; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
@@ -893,6 +966,12 @@ def _fc_html():
     h1 { margin: 0 0 10px 0; font-size: 28px; }
     p { color: #94a3b8; margin-top: 0; }
     .card { margin-top: 18px; background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 16px; }
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+    .toolbar button { background: #0f172a; color: #e2e8f0; border: 1px solid #334155; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+    .toolbar button:hover { border-color: #60a5fa; color: #60a5fa; }
+    #diagramHost { overflow: hidden; border: 1px dashed #334155; border-radius: 10px; min-height: 380px; display: flex; align-items: center; justify-content: center; padding: 8px; }
+    #diagramHost svg { touch-action: none; cursor: grab; }
+    .mermaid { display: none; }
     .links { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
     .links a { color: #60a5fa; text-decoration: none; border: 1px solid #334155; padding: 8px 12px; border-radius: 8px; }
     .links a:hover { border-color: #60a5fa; }
@@ -903,6 +982,14 @@ def _fc_html():
     <h1>Orcest AI System Diagram</h1>
     <p>Unified architecture: Orcest core, SSO, LangChain APIs, RainyModel routing, and ecosystem services.</p>
     <div class="card">
+      <div class="toolbar">
+        <button id="zoomInBtn" type="button">Zoom In</button>
+        <button id="zoomOutBtn" type="button">Zoom Out</button>
+        <button id="resetBtn" type="button">Reset</button>
+        <button id="exportSvgBtn" type="button">Export SVG</button>
+        <button id="exportPngBtn" type="button">Export PNG</button>
+      </div>
+      <div id="diagramHost"></div>
       <pre class="mermaid">
 flowchart TD
   userNode["User"]
