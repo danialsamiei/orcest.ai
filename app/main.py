@@ -876,6 +876,89 @@ async function callApi(path){
 </body></html>"""
 
 
+def _fc_html():
+    return """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orcest System Flowchart</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+  </script>
+  <style>
+    body { margin: 0; background: #0a0a0f; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 28px; }
+    h1 { margin: 0 0 10px 0; font-size: 28px; }
+    p { color: #94a3b8; margin-top: 0; }
+    .card { margin-top: 18px; background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 16px; }
+    .links { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .links a { color: #60a5fa; text-decoration: none; border: 1px solid #334155; padding: 8px 12px; border-radius: 8px; }
+    .links a:hover { border-color: #60a5fa; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Orcest AI System Diagram</h1>
+    <p>Unified architecture: Orcest core, SSO, LangChain APIs, RainyModel routing, and ecosystem services.</p>
+    <div class="card">
+      <pre class="mermaid">
+flowchart TD
+  user[User]
+  web[orcest.ai Web]
+  sso[login.orcest.ai SSO]
+  orch[Orchestration UI]
+  lcu[LangChain Console UI]
+  lcapi[Orcest LangChain API]
+  manifest[RainyModel Manifest]
+  rm[RainyModel Proxy]
+  providers[Model Providers]
+
+  deep[Deep Agents]
+  graph[LangGraph]
+  integ[Integrations]
+  smith[LangSmith]
+  deploy[LangSmith Deployment]
+
+  lamino[llm.orcest.ai]
+  maestrist[agent.orcest.ai]
+  orcide[ide.orcest.ai]
+  status[status.orcest.ai]
+
+  user --> web
+  web -->|"Login"| sso
+  sso --> orch
+  orch --> lcu
+
+  lcu --> lcapi
+  lcapi --> deep
+  lcapi --> graph
+  lcapi --> integ
+  lcapi --> smith
+  lcapi --> deploy
+
+  lcapi --> manifest
+  manifest --> rm
+  rm --> providers
+
+  web --> lamino
+  web --> maestrist
+  web --> orcide
+  web --> status
+      </pre>
+    </div>
+    <div class="links">
+      <a href="/orchestration">Orchestration</a>
+      <a href="/orchestration/langchain">LangChain Console</a>
+      <a href="/api/langchain/ecosystem">LangChain Ecosystem API</a>
+      <a href="/api/rainymodel/langchain-manifest">RainyModel Manifest</a>
+    </div>
+  </div>
+</body>
+</html>"""
+
+
 @app.get("/orchestration", response_class=HTMLResponse)
 async def orchestration_page(request: Request):
     """Orcest AI Orchestration - LangChain-based service (requires SSO)"""
@@ -916,3 +999,9 @@ async def _is_authenticated_token(token: str) -> bool:
             headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
         )
     return verify_res.status_code == 200 and verify_res.json().get("valid")
+
+
+@app.get("/fc", response_class=HTMLResponse)
+async def flowchart_page():
+    """Public flowchart page for system architecture."""
+    return HTMLResponse(content=_fc_html())
