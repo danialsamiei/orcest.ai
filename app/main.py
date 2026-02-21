@@ -905,47 +905,47 @@ def _fc_html():
     <div class="card">
       <pre class="mermaid">
 flowchart TD
-  user[User]
-  web[orcest.ai Web]
-  sso[login.orcest.ai SSO]
-  orch[Orchestration UI]
-  lcu[LangChain Console UI]
-  lcapi[Orcest LangChain API]
-  manifest[RainyModel Manifest]
-  rm[RainyModel Proxy]
-  providers[Model Providers]
+  userNode["User"]
+  webNode["orcest.ai Web"]
+  ssoNode["login.orcest.ai SSO"]
+  orchestrationNode["Orchestration UI"]
+  langchainUiNode["LangChain Console UI"]
+  langchainApiNode["Orcest LangChain API"]
+  manifestNode["RainyModel Manifest"]
+  rainyModelNode["RainyModel Proxy"]
+  providersNode["Model Providers"]
 
-  deep[Deep Agents]
-  graph[LangGraph]
-  integ[Integrations]
-  smith[LangSmith]
-  deploy[LangSmith Deployment]
+  deepAgentsNode["Deep Agents"]
+  langGraphNode["LangGraph"]
+  integrationsNode["Integrations"]
+  langsmithNode["LangSmith"]
+  deploymentNode["LangSmith Deployment"]
 
-  lamino[llm.orcest.ai]
-  maestrist[agent.orcest.ai]
-  orcide[ide.orcest.ai]
-  status[status.orcest.ai]
+  laminoNode["llm.orcest.ai"]
+  maestristNode["agent.orcest.ai"]
+  orcideNode["ide.orcest.ai"]
+  statusNode["status.orcest.ai"]
 
-  user --> web
-  web -->|"Login"| sso
-  sso --> orch
-  orch --> lcu
+  userNode --> webNode
+  webNode -->|"Login"| ssoNode
+  ssoNode --> orchestrationNode
+  orchestrationNode --> langchainUiNode
 
-  lcu --> lcapi
-  lcapi --> deep
-  lcapi --> graph
-  lcapi --> integ
-  lcapi --> smith
-  lcapi --> deploy
+  langchainUiNode --> langchainApiNode
+  langchainApiNode --> deepAgentsNode
+  langchainApiNode --> langGraphNode
+  langchainApiNode --> integrationsNode
+  langchainApiNode --> langsmithNode
+  langchainApiNode --> deploymentNode
 
-  lcapi --> manifest
-  manifest --> rm
-  rm --> providers
+  langchainApiNode --> manifestNode
+  manifestNode --> rainyModelNode
+  rainyModelNode --> providersNode
 
-  web --> lamino
-  web --> maestrist
-  web --> orcide
-  web --> status
+  webNode --> laminoNode
+  webNode --> maestristNode
+  webNode --> orcideNode
+  webNode --> statusNode
       </pre>
     </div>
     <div class="links">
