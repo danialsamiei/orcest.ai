@@ -14,6 +14,7 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 app = FastAPI(
     title="Orcest.ai",
@@ -41,6 +42,47 @@ SSO_CLIENT_ID = os.getenv("SSO_CLIENT_ID", "orcest")
 SSO_CLIENT_SECRET = os.getenv("SSO_CLIENT_SECRET")
 SSO_CALLBACK_URL = os.getenv("SSO_CALLBACK_URL", "https://orcest.ai/auth/callback")
 ORCEST_SSO_COOKIE = "orcest_sso_token"
+
+LANGCHAIN_ECOSYSTEM = {
+    "deep_agents": {
+        "name": "Deep Agents",
+        "description": "Build agents that can plan, use subagents, and leverage file systems for complex tasks.",
+        "url": "https://docs.langchain.com/oss/python/deepagents/overview",
+    },
+    "langgraph": {
+        "name": "LangGraph",
+        "description": "Low-level orchestration framework for reliable, stateful, human-in-the-loop agents.",
+        "url": "https://www.langchain.com/langgraph",
+    },
+    "integrations": {
+        "name": "Integrations",
+        "description": "Catalog of chat models, embedding models, tools, toolkits, and connectors.",
+        "url": "https://docs.langchain.com/oss/python/integrations/providers/overview",
+    },
+    "langsmith": {
+        "name": "LangSmith",
+        "description": "Observability, evals, debugging, and production visibility for LLM applications.",
+        "url": "https://www.langchain.com/langsmith",
+    },
+    "langsmith_deployment": {
+        "name": "LangSmith Deployment",
+        "description": "Purpose-built deployment for long-running, stateful workflows with fast iteration.",
+        "url": "https://docs.langchain.com/langsmith/deployments",
+    },
+}
+
+LANGCHAIN_ORCEST_ENDPOINTS = {
+    "ecosystem": "https://orcest.ai/api/langchain/ecosystem",
+    "health": "https://orcest.ai/api/langchain/health",
+    "run_agent": "https://orcest.ai/api/langchain/agent/run",
+    "rainymodel_manifest": "https://orcest.ai/api/rainymodel/langchain-manifest",
+}
+
+
+class LangChainAgentRunRequest(BaseModel):
+    query: str
+    agent_type: str = "general"
+    metadata: dict | None = None
 
 LANDING_HTML = """<!DOCTYPE html>
 <html lang="en">
@@ -366,6 +408,22 @@ document.addEventListener('DOMContentLoaded', function() {
 <span class="feature-tag">Account Mgmt</span>
 </div>
 </a>
+
+<!-- LangChain Ecosystem -->
+<a href="/api/langchain/ecosystem" class="service-card">
+<div class="service-header">
+<span class="service-tag tag-api">LangChain</span>
+<div class="service-status"></div>
+</div>
+<h3 class="service-title">LangChain Ecosystem</h3>
+<p class="service-description">Deep Agents, LangGraph, Integrations, LangSmith, and Deployment endpoints are available directly via Orcest AI APIs for unified orchestration.</p>
+<span class="service-url">orcest.ai/api/langchain/ecosystem →</span>
+<div class="service-features">
+<span class="feature-tag">Deep Agents</span>
+<span class="feature-tag">LangGraph</span>
+<span class="feature-tag">LangSmith</span>
+</div>
+</a>
 </div>
 </div>
 </section>
@@ -496,8 +554,62 @@ async def api_info():
             "orcide": "https://ide.orcest.ai",
             "login": "https://login.orcest.ai",
             "status": "https://status.orcest.ai",
+            "langchain_ecosystem": "https://orcest.ai/api/langchain/ecosystem",
         },
         "rainymodel_api": RAINYMODEL_BASE_URL,
+        "langchain_api_endpoints": LANGCHAIN_ORCEST_ENDPOINTS,
+    }
+
+
+@app.get("/api/langchain/health")
+async def langchain_health():
+    return {
+        "status": "healthy",
+        "provider": "orcest.ai",
+        "service": "langchain-api",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "endpoints": LANGCHAIN_ORCEST_ENDPOINTS,
+    }
+
+
+@app.get("/api/langchain/ecosystem")
+async def langchain_ecosystem():
+    return {
+        "name": "LangChain Ecosystem via Orcest.ai",
+        "components": LANGCHAIN_ECOSYSTEM,
+        "orcest_endpoints": LANGCHAIN_ORCEST_ENDPOINTS,
+        "notes": {
+            "integration_mode": "orcest.ai acts as unified discovery and orchestration surface",
+            "rainymodel_connection": "RainyModel can consume Orcest LangChain endpoint manifest",
+        },
+    }
+
+
+@app.post("/api/langchain/agent/run")
+async def langchain_agent_run(payload: LangChainAgentRunRequest):
+    return {
+        "status": "accepted",
+        "engine": "langchain-orcest",
+        "agent_type": payload.agent_type,
+        "query": payload.query,
+        "metadata": payload.metadata or {},
+        "next": {
+            "rainymodel_proxy": f"{RAINYMODEL_BASE_URL}/chat/completions",
+            "ecosystem": LANGCHAIN_ORCEST_ENDPOINTS["ecosystem"],
+        },
+    }
+
+
+@app.get("/api/rainymodel/langchain-manifest")
+async def rainymodel_langchain_manifest():
+    return {
+        "consumer": "RainyModel",
+        "target": "Orcest LangChain API",
+        "recommended_endpoint": LANGCHAIN_ORCEST_ENDPOINTS["run_agent"],
+        "health_endpoint": LANGCHAIN_ORCEST_ENDPOINTS["health"],
+        "ecosystem_endpoint": LANGCHAIN_ORCEST_ENDPOINTS["ecosystem"],
+        "routing_policy_hint": "RainyModel should include Orcest LangChain API as one upstream endpoint",
+        "updated_at": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -606,11 +718,14 @@ a:hover{{text-decoration:underline}}
 <p><a href="/api/info">/api/info</a> – اطلاعات پلتفرم</p>
 <p><a href="/health">/health</a> – وضعیت سرویس</p>
 <p><a href="/ecosystem/health">/ecosystem/health</a> – سلامت اکوسیستم</p>
+<p><a href="/api/langchain/ecosystem">/api/langchain/ecosystem</a> – اجزای کامل LangChain</p>
+<p><a href="/api/langchain/agent/run">/api/langchain/agent/run</a> – اجرای Agent روی API اورکست</p>
 </div>
 <div class="card">
 <h3>RainyModel API</h3>
 <p>Base URL: <code>{RAINYMODEL_BASE_URL}</code></p>
 <p>استفاده با کلید API از داشبورد SSO.</p>
+<p>Manifest اتصال RainyModel به LangChain Orcest: <a href="/api/rainymodel/langchain-manifest">/api/rainymodel/langchain-manifest</a></p>
 </div>
 <p><a href="https://orcest.ai">← بازگشت به صفحه اصلی</a> | <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">LangChain</a> | <a href="https://login.orcest.ai/logout">خروج</a></p>
 </div></body></html>"""
