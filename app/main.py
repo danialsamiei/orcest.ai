@@ -111,6 +111,14 @@ LANDING_HTML = """<!DOCTYPE html>
 <meta name="twitter:title" content="Orcest AI - The Self-Adaptive LLM Orchestrator">
 <meta name="twitter:description" content="Unified AI orchestration across free, internal, and premium models.">
 <meta name="twitter:image" content="https://orcest.ai/static/branding/Primary_Logo.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3ML0EE7ZSW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3ML0EE7ZSW');
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2701288361875881" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
