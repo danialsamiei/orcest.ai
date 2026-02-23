@@ -100,10 +100,60 @@ LANDING_HTML = """<!DOCTYPE html>
 <title>Orcest AI - The Self-Adaptive LLM Orchestrator</title>
 <meta name="description" content="Intelligent LLM Orchestration Platform - unified routing across free, internal, and premium AI models. Complete AI ecosystem for developers.">
 <meta name="keywords" content="AI, LLM, orchestration, chatbot, IDE, agent, artificial intelligence">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://orcest.ai/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Orcest AI - The Self-Adaptive LLM Orchestrator">
+<meta property="og:description" content="Intelligent orchestration platform unifying free, internal, and premium AI models with advanced routing and developer tools.">
+<meta property="og:url" content="https://orcest.ai/">
+<meta property="og:image" content="https://orcest.ai/static/branding/Primary_Logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Orcest AI - The Self-Adaptive LLM Orchestrator">
+<meta name="twitter:description" content="Unified AI orchestration across free, internal, and premium models.">
+<meta name="twitter:image" content="https://orcest.ai/static/branding/Primary_Logo.png">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2701288361875881" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/static/branding/Primary_Logo.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/branding/Favicon_32pxl.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/static/branding/Favicon_64pxl.png">
+<link rel="shortcut icon" href="/static/branding/Logo_32pxl.ico">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ORCEST AI LTD",
+  "url": "https://orcest.ai",
+  "logo": "https://orcest.ai/static/branding/Primary_Logo.png",
+  "email": "hello@orcest.ai",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-672-472-9898",
+      "contactType": "customer support",
+      "availableLanguage": ["en"]
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "301-3229 St. Johns St",
+    "addressLocality": "Port Moody",
+    "addressRegion": "BC",
+    "postalCode": "V3H 0M4",
+    "addressCountry": "CA"
+  },
+  "sameAs": [
+    "https://linkedin.com/company/orcest",
+    "https://instagram.com/orcest.ai",
+    "https://x.com/orcestai",
+    "https://facebook.com/orcest.ai",
+    "https://discord.gg/orcestai",
+    "https://t.me/orcestai",
+    "https://t.me/orcestai_bot"
+  ]
+}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -123,12 +173,15 @@ LANDING_HTML = """<!DOCTYPE html>
   --border-color:#374151;
   --shadow-glow:0 0 50px rgba(96,165,250,0.15);
 }
+html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-secondary);min-height:100vh;line-height:1.6}
+section[id]{scroll-margin-top:90px}
 
 /* Navigation */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-color)}
 .nav-container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;height:70px}
-.nav-logo{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
+.nav-logo{display:inline-flex;align-items:center;text-decoration:none}
+.nav-logo img{height:36px;width:auto;display:block}
 .nav-links{display:flex;gap:32px;align-items:center}
 .nav-links a{color:var(--text-muted);text-decoration:none;font-weight:500;transition:color 0.3s}
 .nav-links a:hover{color:var(--accent-blue)}
@@ -136,14 +189,14 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg-
 .nav-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow-glow)}
 
 /* Hero Section */
-.hero{position:relative;text-align:center;padding:140px 20px 80px;background:linear-gradient(135deg,#0a0a1a 0%,#1a1a3a 30%,#2a1a3a 70%,#0a0a1a 100%);overflow:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.hero-bg-animation{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.12;z-index:1;background-size:cover;background-position:center;animation:orcestAnimation 12s infinite linear}
-@keyframes orcestAnimation{0%{background-image:url('/static/frames/frame-001.jpg')}12.5%{background-image:url('/static/frames/frame-026.jpg')}25%{background-image:url('/static/frames/frame-051.jpg')}37.5%{background-image:url('/static/frames/frame-076.jpg')}50%{background-image:url('/static/frames/key-frame-100.jpg')}62.5%{background-image:url('/static/frames/frame-126.jpg')}75%{background-image:url('/static/frames/frame-151.jpg')}87.5%{background-image:url('/static/frames/frame-176.jpg')}100%{background-image:url('/static/frames/key-frame-200.jpg')}}
+.hero{position:relative;text-align:center;padding:120px 20px 72px;background:linear-gradient(135deg,#0a0a1a 0%,#1a1a3a 30%,#2a1a3a 70%,#0a0a1a 100%);overflow:hidden;min-height:82vh;display:flex;align-items:center;justify-content:center}
+.hero-bg-animation{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.12;z-index:1;background-size:cover;background-position:center;background-image:url('/static/frames/frame-001.jpg');will-change:background-image}
 .hero-content{position:relative;z-index:2;max-width:900px}
 .hero h1{font-size:4.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple),var(--accent-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px;line-height:1.1}
 .hero-subtitle{font-size:1.4rem;color:var(--text-muted);max-width:700px;margin:0 auto 32px;font-weight:400}
 .hero-description{font-size:1.1rem;color:var(--text-secondary);max-width:600px;margin:0 auto 40px;opacity:0.9}
 .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.hero-scroll-hint{display:inline-block;margin-top:-8px;margin-bottom:10px;font-size:0.9rem;color:var(--text-muted);letter-spacing:0.2px}
 .btn-primary{background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));color:white;padding:16px 32px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px}
 .btn-primary:hover{transform:translateY(-3px);box-shadow:var(--shadow-glow)}
 .btn-secondary{background:rgba(255,255,255,0.1);color:var(--text-primary);padding:16px 32px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all 0.3s;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1)}
@@ -197,58 +250,103 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg-
 .footer-section h4{color:var(--text-primary);font-size:1.2rem;font-weight:700;margin-bottom:20px}
 .footer-section a{color:var(--text-muted);text-decoration:none;display:block;margin-bottom:8px;transition:color 0.3s}
 .footer-section a:hover{color:var(--accent-blue)}
+.footer-text{color:var(--text-muted);font-size:0.95rem;line-height:1.7;margin-top:8px}
 .footer-bottom{text-align:center;padding-top:40px;border-top:1px solid var(--border-color);color:var(--text-muted)}
 .footer-bottom a{color:var(--accent-blue);text-decoration:none}
 
 /* Responsive */
-@media (prefers-reduced-motion: reduce){.hero-bg-animation{animation:none;background-image:url('/static/frames/key-frame-100.jpg')}}
+@media (prefers-reduced-motion: reduce){.hero-bg-animation{background-image:url('/static/frames/key-frame-100.jpg')}}
 @media (max-width: 1024px){.hero h1{font-size:3.5rem}.services-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}}
-@media (max-width: 768px){.nav-links{display:none}.hero{padding:120px 20px 60px}.hero h1{font-size:2.8rem}.hero-bg-animation{opacity:0.06}.hero-cta{flex-direction:column;align-items:center}.hero-stats{gap:20px}.services-grid{grid-template-columns:1fr;gap:24px}.service-card{padding:30px}}
+@media (max-width: 768px){.nav-links{display:none}.nav-logo img{height:32px}.hero{padding:110px 20px 56px;min-height:74vh}.hero h1{font-size:2.8rem}.hero-bg-animation{opacity:0.06}.hero-cta{flex-direction:column;align-items:center}.hero-stats{gap:20px}.services-grid{grid-template-columns:1fr;gap:24px}.service-card{padding:30px}}
 @media (max-width: 480px){.hero h1{font-size:2.2rem}.btn-primary,.btn-secondary{padding:14px 24px;font-size:1rem}}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Preload animation frames
-    const keyFrames = [
-        '/static/frames/key-frame-001.jpg',
-        '/static/frames/key-frame-050.jpg', 
-        '/static/frames/key-frame-100.jpg',
-        '/static/frames/key-frame-150.jpg',
+    const animationEl = document.querySelector('.hero-bg-animation');
+    const heroSection = document.querySelector('.hero');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const scrollFrames = [
+        '/static/frames/frame-001.jpg','/static/frames/frame-006.jpg','/static/frames/frame-011.jpg','/static/frames/frame-016.jpg',
+        '/static/frames/frame-021.jpg','/static/frames/frame-026.jpg','/static/frames/frame-031.jpg','/static/frames/frame-036.jpg',
+        '/static/frames/frame-041.jpg','/static/frames/frame-046.jpg','/static/frames/frame-051.jpg','/static/frames/frame-056.jpg',
+        '/static/frames/frame-061.jpg','/static/frames/frame-066.jpg','/static/frames/frame-071.jpg','/static/frames/frame-076.jpg',
+        '/static/frames/frame-081.jpg','/static/frames/frame-086.jpg','/static/frames/frame-091.jpg','/static/frames/frame-096.jpg',
+        '/static/frames/frame-101.jpg','/static/frames/frame-106.jpg','/static/frames/frame-111.jpg','/static/frames/frame-116.jpg',
+        '/static/frames/frame-121.jpg','/static/frames/frame-126.jpg','/static/frames/frame-131.jpg','/static/frames/frame-136.jpg',
+        '/static/frames/frame-141.jpg','/static/frames/frame-146.jpg','/static/frames/frame-151.jpg','/static/frames/frame-156.jpg',
+        '/static/frames/frame-161.jpg','/static/frames/frame-166.jpg','/static/frames/frame-171.jpg','/static/frames/frame-176.jpg',
+        '/static/frames/frame-181.jpg','/static/frames/frame-186.jpg','/static/frames/frame-191.jpg','/static/frames/frame-196.jpg',
         '/static/frames/key-frame-200.jpg'
     ];
-    
-    keyFrames.forEach(src => {
+
+    if (animationEl) {
+        animationEl.style.backgroundImage = "url('" + scrollFrames[0] + "')";
+    }
+
+    // Preload quickly visible frames first, then preload the rest on idle time.
+    scrollFrames.slice(0, 10).forEach(src => {
         const img = new Image();
         img.src = src;
     });
-    
-    // Handle reduced motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const animationEl = document.querySelector('.hero-bg-animation');
-        if (animationEl) {
-            animationEl.style.animationPlayState = 'paused';
-        }
+    const preloadRemaining = () => {
+        scrollFrames.slice(10).forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    };
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(preloadRemaining);
+    } else {
+        setTimeout(preloadRemaining, 1200);
     }
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+
+    if (!prefersReducedMotion && animationEl && heroSection) {
+        let lastIndex = -1;
+        let ticking = false;
+
+        const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+        const updateFrame = () => {
+            const rect = heroSection.getBoundingClientRect();
+            const totalScrollable = Math.max(heroSection.offsetHeight * 0.85, 320);
+            const scrolledInsideHero = clamp(-rect.top, 0, totalScrollable);
+            const progress = scrolledInsideHero / totalScrollable;
+            const nextIndex = Math.round(progress * (scrollFrames.length - 1));
+
+            if (nextIndex !== lastIndex) {
+                animationEl.style.backgroundImage = "url('" + scrollFrames[nextIndex] + "')";
+                animationEl.style.opacity = String(0.08 + (progress * 0.08));
+                lastIndex = nextIndex;
             }
-        });
-    });
-    
-    // Add loading states for external links
+
+            ticking = false;
+        };
+
+        const onScrollOrResize = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateFrame);
+                ticking = true;
+            }
+        };
+
+        updateFrame();
+        window.addEventListener('scroll', onScrollOrResize, { passive: true });
+        window.addEventListener('resize', onScrollOrResize);
+    } else if (prefersReducedMotion && animationEl) {
+        animationEl.style.backgroundImage = "url('/static/frames/key-frame-100.jpg')";
+    }
+
+    // Ensure external links open safely in a new tab.
     document.querySelectorAll('a[href^="http"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (!this.target) {
-                this.style.opacity = '0.7';
-                this.innerHTML += ' <span style="font-size:0.8em">↗</span>';
+        try {
+            const isExternal = new URL(link.href).host !== window.location.host;
+            if (isExternal) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
             }
-        });
+        } catch (_error) {
+            // Ignore invalid URLs.
+        }
     });
 });
 </script>
@@ -257,12 +355,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Navigation -->
 <nav class="nav">
 <div class="nav-container">
-<a href="#" class="nav-logo">Orcest AI</a>
+<a href="/" class="nav-logo" aria-label="Orcest AI Home">
+<img src="/static/branding/Primary_Logo.svg" alt="Orcest AI logo">
+</a>
 <div class="nav-links">
 <a href="#ecosystem">Ecosystem</a>
 <a href="#features">Features</a>
-<a href="https://status.orcest.ai">Status</a>
-<a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">LangChain</a>
+<a href="https://status.orcest.ai" target="_blank" rel="noopener noreferrer">Status</a>
+<a href="https://github.com/orcest-ai" target="_blank" rel="noopener noreferrer">GitHub</a>
 <a href="https://login.orcest.ai" class="nav-cta">Login</a>
 </div>
 </div>
@@ -279,6 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="https://rm.orcest.ai" class="btn-primary">Start Building →</a>
 <a href="#ecosystem" class="btn-secondary">Explore Ecosystem</a>
 </div>
+<p class="hero-scroll-hint">Scroll down to preview the ecosystem animation frame-by-frame.</p>
 <div class="hero-stats">
 <div class="stat">
 <span class="stat-number">7+</span>
@@ -306,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="services-grid">
 <!-- RainyModel -->
-<a href="https://rm.orcest.ai" class="service-card">
+<a href="https://rm.orcest.ai" class="service-card" target="_blank" rel="noopener noreferrer">
 <div class="service-header">
 <span class="service-tag tag-llm">LLM Proxy</span>
 <div class="service-status"></div>
@@ -322,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </a>
 
 <!-- Lamino -->
-<a href="https://llm.orcest.ai" class="service-card">
+<a href="https://llm.orcest.ai" class="service-card" target="_blank" rel="noopener noreferrer">
 <div class="service-header">
 <span class="service-tag tag-chat">AI Chat</span>
 <div class="service-status"></div>
@@ -338,7 +439,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </a>
 
 <!-- Maestrist -->
-<a href="https://agent.orcest.ai" class="service-card">
+<a href="https://agent.orcest.ai" class="service-card" target="_blank" rel="noopener noreferrer">
 <div class="service-header">
 <span class="service-tag tag-agent">AI Agent</span>
 <div class="service-status"></div>
@@ -354,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </a>
 
 <!-- Orcide -->
-<a href="https://ide.orcest.ai" class="service-card">
+<a href="https://ide.orcest.ai" class="service-card" target="_blank" rel="noopener noreferrer">
 <div class="service-header">
 <span class="service-tag tag-ide">AI IDE</span>
 <div class="service-status"></div>
@@ -370,7 +471,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </a>
 
 <!-- Core Orchestration -->
-<a href="https://login.orcest.ai/oauth2/authorize?client_id=orcest&redirect_uri=https%3A%2F%2Forcest.ai%2Fauth%2Fcallback&response_type=code&scope=openid%20profile%20email&state=eyJyZXR1cm5UbyI6Ii9vcmNoZXN0cmF0aW9uIn0" class="service-card">
+<a href="https://login.orcest.ai/oauth2/authorize?client_id=orcest&redirect_uri=https%3A%2F%2Forcest.ai%2Fauth%2Fcallback&response_type=code&scope=openid%20profile%20email&state=eyJyZXR1cm5UbyI6Ii9vcmNoZXN0cmF0aW9uIn0" class="service-card" target="_blank" rel="noopener noreferrer">
 <div class="service-header">
 <span class="service-tag tag-api">Core API</span>
 <div class="service-status"></div>
@@ -386,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </a>
 
 <!-- System Status -->
-<a href="https://status.orcest.ai" class="service-card">
+<a href="https://status.orcest.ai" class="service-card" target="_blank" rel="noopener noreferrer">
 <div class="service-header">
 <span class="service-tag tag-status">Monitoring</span>
 <div class="service-status"></div>
@@ -402,7 +503,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </a>
 
 <!-- SSO Portal -->
-<a href="https://login.orcest.ai" class="service-card">
+<a href="https://login.orcest.ai" class="service-card" target="_blank" rel="noopener noreferrer">
 <div class="service-header">
 <span class="service-tag tag-sso">Authentication</span>
 <div class="service-status"></div>
@@ -482,37 +583,50 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="footer-content">
 <div class="footer-section">
 <h4>Platform</h4>
-<a href="https://rm.orcest.ai">RainyModel Proxy</a>
-<a href="https://llm.orcest.ai">Lamino Chat</a>
-<a href="https://agent.orcest.ai">Maestrist Agent</a>
-<a href="https://ide.orcest.ai">Orcide IDE</a>
+<a href="https://rm.orcest.ai" target="_blank" rel="noopener noreferrer">RainyModel Proxy</a>
+<a href="https://llm.orcest.ai" target="_blank" rel="noopener noreferrer">Lamino Chat</a>
+<a href="https://agent.orcest.ai" target="_blank" rel="noopener noreferrer">Maestrist Agent</a>
+<a href="https://ide.orcest.ai" target="_blank" rel="noopener noreferrer">Orcide IDE</a>
 </div>
 <div class="footer-section">
 <h4>Resources</h4>
 <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">LangChain</a>
-<a href="https://status.orcest.ai">System Status</a>
-<a href="https://login.orcest.ai">Authentication</a>
+<a href="https://status.orcest.ai" target="_blank" rel="noopener noreferrer">System Status</a>
+<a href="https://login.orcest.ai" target="_blank" rel="noopener noreferrer">Authentication</a>
 <a href="/api/info">API Documentation</a>
 <a href="/ecosystem/health">Health Check</a>
 </div>
 <div class="footer-section">
 <h4>Company</h4>
-<a href="mailto:admin@danial.ai">Contact Support</a>
-<a href="https://github.com/danialsamiei">GitHub</a>
+<a href="mailto:hello@orcest.ai">Contact Support</a>
+<a href="mailto:admin@danial.ai">CEO: admin@danial.ai</a>
+<a href="https://github.com/orcest-ai" target="_blank" rel="noopener noreferrer">GitHub</a>
 <a href="/metrics">System Metrics</a>
 <a href="#ecosystem">Ecosystem</a>
+<p class="footer-text">ORCEST AI LTD</p>
+<p class="footer-text">301-3229 St. Johns St, Port Moody, BC V3H 0M4, Canada</p>
+<p class="footer-text">Business Type: BC Limited Company</p>
+<p class="footer-text">Name Request: NR 5123838 (Approved)</p>
+<p class="footer-text">Registry: Business Corporations Act (BC)</p>
+<p class="footer-text">Name Reservation Expires: April 15, 2026</p>
 </div>
 <div class="footer-section">
 <h4>Connect</h4>
-<a href="https://twitter.com/orcest_ai">Twitter</a>
-<a href="https://linkedin.com/company/orcest-ai">LinkedIn</a>
+<a href="https://linkedin.com/company/orcest" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+<a href="https://instagram.com/orcest.ai" target="_blank" rel="noopener noreferrer">Instagram</a>
+<a href="https://x.com/orcestai" target="_blank" rel="noopener noreferrer">X</a>
+<a href="https://facebook.com/orcest.ai" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://discord.gg/orcestai" target="_blank" rel="noopener noreferrer">Discord</a>
 <a href="mailto:hello@orcest.ai">Email Us</a>
-<a href="https://discord.gg/orcest">Discord</a>
+<a href="https://wa.me/16724729898" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+<a href="https://t.me/orcestai" target="_blank" rel="noopener noreferrer">Telegram Channel</a>
+<a href="https://t.me/orcestai_bot" target="_blank" rel="noopener noreferrer">Telegram Bot</a>
+<a href="https://signal.me/#p/+16724729898" target="_blank" rel="noopener noreferrer">Signal</a>
 </div>
 </div>
 <div class="footer-bottom">
-<p>&copy; 2025 Orcest AI. The Self-Adaptive LLM Orchestrator. Built with ❤️ for developers.</p>
-<p>Support: <a href="mailto:admin@danial.ai">admin@danial.ai</a> | Status: <a href="https://status.orcest.ai">All Systems Operational</a></p>
+<p>&copy; 2026 Orcest AI. The Self-Adaptive LLM Orchestrator. Built with ❤️ for developers.</p>
+<p>Support: <a href="mailto:hello@orcest.ai">hello@orcest.ai</a> | Phone: <a href="tel:+16724729898">+1 672 472 9898</a> (Whatsapp, Telegram, Signal) | Status: <a href="https://status.orcest.ai" target="_blank" rel="noopener noreferrer">All Systems Operational</a></p>
 </div>
 </div>
 </footer>
