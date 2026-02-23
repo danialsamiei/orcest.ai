@@ -212,6 +212,7 @@ body.intro-complete .nav{opacity:1;transform:translateY(0);pointer-events:auto}
 .hero{position:relative;text-align:center;padding:120px 20px 72px;background:linear-gradient(135deg,#0a0a1a 0%,#1a1a3a 30%,#2a1a3a 70%,#0a0a1a 100%);overflow:hidden;min-height:82vh;display:flex;align-items:center;justify-content:center}
 .hero-bg-animation{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.12;z-index:1;background-size:cover;background-position:center;background-image:url('/static/frames/frame-001.jpg');will-change:background-image}
 .hero-content{position:relative;z-index:2;max-width:900px}
+.hero-logo{display:block;width:170px;max-width:38vw;height:auto;margin:0 auto 20px;filter:drop-shadow(0 10px 22px rgba(8,145,178,.28))}
 .hero h1{font-size:4.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple),var(--accent-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px;line-height:1.1}
 .hero-subtitle{font-size:1.4rem;color:var(--text-muted);max-width:700px;margin:0 auto 32px;font-weight:400}
 .hero-description{font-size:1.1rem;color:var(--text-secondary);max-width:600px;margin:0 auto 40px;opacity:0.9}
@@ -284,7 +285,7 @@ body.intro-complete main.page-content{opacity:1;transform:translateY(0);pointer-
 /* Responsive */
 @media (prefers-reduced-motion: reduce){.hero-bg-animation{background-image:url('/static/frames/key-frame-100.jpg')}}
 @media (max-width: 1024px){.hero h1{font-size:3.5rem}.services-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}}
-@media (max-width: 768px){.nav-links{display:none}.nav-logo img{height:32px}.hero{padding:110px 20px 56px;min-height:74vh}.hero h1{font-size:2.8rem}.hero-bg-animation{opacity:0.06}.hero-cta{flex-direction:column;align-items:center}.hero-stats{gap:20px}.services-grid{grid-template-columns:1fr;gap:24px}.service-card{padding:30px}}
+@media (max-width: 768px){.nav-links{display:none}.nav-logo img{height:32px}.hero{padding:110px 20px 56px;min-height:74vh}.hero-logo{width:132px;margin-bottom:16px}.hero h1{font-size:2.8rem}.hero-bg-animation{opacity:0.06}.hero-cta{flex-direction:column;align-items:center}.hero-stats{gap:20px}.services-grid{grid-template-columns:1fr;gap:24px}.service-card{padding:30px}}
 @media (max-width: 480px){.hero h1{font-size:2.2rem}.btn-primary,.btn-secondary{padding:14px 24px;font-size:1rem}}
 </style>
 <script>
@@ -507,6 +508,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <section class="hero">
 <div class="hero-bg-animation"></div>
 <div class="hero-content">
+<img class="hero-logo" src="/static/branding/Primary_Logo.png" alt="Orcest AI emblem">
 <h1>Orcest AI</h1>
 <p class="hero-subtitle">The Self-Adaptive LLM Orchestrator</p>
 <p class="hero-description">Intelligent orchestration platform unifying free, internal, and premium AI models with advanced routing, real-time processing, and comprehensive developer tools.</p>
