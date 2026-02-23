@@ -134,7 +134,7 @@ LANDING_HTML = """<!DOCTYPE html>
   "name": "ORCEST AI LTD",
   "url": "https://orcest.ai",
   "logo": "https://orcest.ai/static/branding/Primary_Logo.png",
-  "email": "hello@orcest.ai",
+  "email": "info@orcest.ai",
   "contactPoint": [
     {
       "@type": "ContactPoint",
@@ -184,17 +184,29 @@ LANDING_HTML = """<!DOCTYPE html>
 html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-secondary);min-height:100vh;line-height:1.6}
 section[id]{scroll-margin-top:90px}
+body.intro-active{overflow:hidden}
+
+/* Intro Loader and reveal states */
+.loader-overlay{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%, #1a1a3a 0%, #0a0a0f 70%);opacity:1;visibility:visible;transition:opacity .5s ease,visibility .5s ease}
+.loader-card{display:flex;flex-direction:column;align-items:center;gap:18px}
+.loader-card img{width:220px;max-width:62vw;height:auto;filter:drop-shadow(0 0 24px rgba(96,165,250,.35))}
+.loader-spinner{width:42px;height:42px;border-radius:50%;border:3px solid rgba(255,255,255,.18);border-top-color:var(--accent-blue);animation:spin 1s linear infinite}
+.loader-text{font-size:.95rem;color:var(--text-muted);letter-spacing:.3px}
+@keyframes spin{to{transform:rotate(360deg)}}
+body.site-loaded .loader-overlay{opacity:0;visibility:hidden;pointer-events:none}
 
 /* Navigation */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-color)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-color);transition:opacity .6s ease,transform .6s ease}
 .nav-container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;height:70px}
 .nav-logo{display:inline-flex;align-items:center;text-decoration:none}
 .nav-logo img{height:36px;width:auto;display:block}
 .nav-links{display:flex;gap:32px;align-items:center}
 .nav-links a{color:var(--text-muted);text-decoration:none;font-weight:500;transition:color 0.3s}
 .nav-links a:hover{color:var(--accent-blue)}
-.nav-cta{background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));color:white;padding:10px 20px;border-radius:25px;text-decoration:none;font-weight:600;transition:transform 0.3s,box-shadow 0.3s}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow-glow)}
+.nav-cta{background:linear-gradient(135deg,#93c5fd,#c4b5fd);color:#0f172a !important;padding:10px 20px;border-radius:25px;text-decoration:none;font-weight:700;letter-spacing:.2px;text-shadow:none;border:1px solid rgba(15,23,42,.18);transition:transform 0.3s,box-shadow 0.3s,filter 0.3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow-glow);filter:brightness(.98)}
+body.intro-active .nav{opacity:0;transform:translateY(-16px);pointer-events:none}
+body.intro-complete .nav{opacity:1;transform:translateY(0);pointer-events:auto}
 
 /* Hero Section */
 .hero{position:relative;text-align:center;padding:120px 20px 72px;background:linear-gradient(135deg,#0a0a1a 0%,#1a1a3a 30%,#2a1a3a 70%,#0a0a1a 100%);overflow:hidden;min-height:82vh;display:flex;align-items:center;justify-content:center}
@@ -203,16 +215,20 @@ section[id]{scroll-margin-top:90px}
 .hero h1{font-size:4.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple),var(--accent-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:24px;line-height:1.1}
 .hero-subtitle{font-size:1.4rem;color:var(--text-muted);max-width:700px;margin:0 auto 32px;font-weight:400}
 .hero-description{font-size:1.1rem;color:var(--text-secondary);max-width:600px;margin:0 auto 40px;opacity:0.9}
-.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
-.hero-scroll-hint{display:inline-block;margin-top:-8px;margin-bottom:10px;font-size:0.9rem;color:var(--text-muted);letter-spacing:0.2px}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;transition:opacity .45s ease,transform .45s ease}
+.hero-scroll-hint{display:inline-block;margin-top:-8px;margin-bottom:10px;font-size:0.9rem;color:var(--text-muted);letter-spacing:0.2px;transition:opacity .45s ease,transform .45s ease}
 .btn-primary{background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));color:white;padding:16px 32px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all 0.3s;display:inline-flex;align-items:center;gap:8px}
 .btn-primary:hover{transform:translateY(-3px);box-shadow:var(--shadow-glow)}
 .btn-secondary{background:rgba(255,255,255,0.1);color:var(--text-primary);padding:16px 32px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all 0.3s;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1)}
 .btn-secondary:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px)}
-.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:60px}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:60px;transition:opacity .45s ease,transform .45s ease}
 .stat{text-align:center}
 .stat-number{font-size:2.5rem;font-weight:800;color:var(--accent-blue);display:block}
 .stat-label{font-size:0.9rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.scroll-invite{margin:14px auto 0;max-width:580px;padding:12px 18px;border:1px solid rgba(96,165,250,.35);background:rgba(11,18,32,.75);border-radius:12px;color:var(--text-primary);font-size:.92rem;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+.scroll-invite.visible{opacity:1;transform:translateY(0)}
+body.intro-active .hero-cta,body.intro-active .hero-stats,body.intro-active .hero-scroll-hint{opacity:0;transform:translateY(14px);pointer-events:none}
+body.intro-complete .hero-cta,body.intro-complete .hero-stats,body.intro-complete .hero-scroll-hint{opacity:1;transform:translateY(0);pointer-events:auto}
 
 /* Ecosystem Section */
 .ecosystem{padding:100px 20px;background:linear-gradient(180deg,var(--bg-primary) 0%,var(--bg-secondary) 100%)}
@@ -261,6 +277,9 @@ section[id]{scroll-margin-top:90px}
 .footer-text{color:var(--text-muted);font-size:0.95rem;line-height:1.7;margin-top:8px}
 .footer-bottom{text-align:center;padding-top:40px;border-top:1px solid var(--border-color);color:var(--text-muted)}
 .footer-bottom a{color:var(--accent-blue);text-decoration:none}
+main.page-content{transition:opacity .7s ease,transform .7s ease}
+body.intro-active main.page-content{opacity:0;transform:translateY(24px);pointer-events:none}
+body.intro-complete main.page-content{opacity:1;transform:translateY(0);pointer-events:auto}
 
 /* Responsive */
 @media (prefers-reduced-motion: reduce){.hero-bg-animation{background-image:url('/static/frames/key-frame-100.jpg')}}
@@ -270,8 +289,9 @@ section[id]{scroll-margin-top:90px}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const body = document.body;
     const animationEl = document.querySelector('.hero-bg-animation');
-    const heroSection = document.querySelector('.hero');
+    const scrollInvite = document.getElementById('scroll-invite');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const scrollFrames = [
@@ -288,61 +308,161 @@ document.addEventListener('DOMContentLoaded', function() {
         '/static/frames/key-frame-200.jpg'
     ];
 
-    if (animationEl) {
-        animationEl.style.backgroundImage = "url('" + scrollFrames[0] + "')";
-    }
+    let introProgress = 0;
+    let userInteracted = false;
+    let autoPlaying = false;
+    let autoPlayTimer = null;
+    let promptTimer = null;
+    let autoTriggerTimer = null;
+    let startY = null;
 
-    // Preload quickly visible frames first, then preload the rest on idle time.
-    scrollFrames.slice(0, 10).forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
-    const preloadRemaining = () => {
-        scrollFrames.slice(10).forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+    const setFrameByProgress = (progress) => {
+        if (!animationEl) return;
+        const p = clamp(progress, 0, 1);
+        const idx = Math.round(p * (scrollFrames.length - 1));
+        animationEl.style.backgroundImage = "url('" + scrollFrames[idx] + "')";
+        animationEl.style.opacity = String(0.08 + (p * 0.10));
     };
-    if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(preloadRemaining);
-    } else {
-        setTimeout(preloadRemaining, 1200);
+
+    const setIntroState = (active) => {
+        body.classList.toggle('intro-active', active);
+        body.classList.toggle('intro-complete', !active);
+    };
+
+    const completeIntro = () => {
+        introProgress = 1;
+        setFrameByProgress(1);
+        setIntroState(false);
+        if (scrollInvite) scrollInvite.classList.remove('visible');
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+        autoPlaying = false;
+    };
+
+    const updateFromDelta = (deltaY) => {
+        const step = clamp(Math.abs(deltaY) / 1600, 0.015, 0.09);
+        introProgress = clamp(introProgress + (deltaY > 0 ? step : -step), 0, 1);
+        setFrameByProgress(introProgress);
+        if (introProgress >= 0.999) {
+            completeIntro();
+        } else if (introProgress <= 0.001) {
+            setIntroState(true);
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        }
+    };
+
+    const handleWheel = (event) => {
+        const atTop = window.scrollY <= 2;
+        if (body.classList.contains('intro-active')) {
+            event.preventDefault();
+            if (!userInteracted) userInteracted = true;
+            if (scrollInvite) scrollInvite.classList.remove('visible');
+            if (autoPlayTimer) { clearInterval(autoPlayTimer); autoPlaying = false; }
+            updateFromDelta(event.deltaY);
+            return;
+        }
+        if (body.classList.contains('intro-complete') && atTop && event.deltaY < 0) {
+            setIntroState(true);
+            event.preventDefault();
+            updateFromDelta(event.deltaY);
+        }
+    };
+
+    const handleTouchStart = (event) => {
+        if (event.touches && event.touches[0]) {
+            startY = event.touches[0].clientY;
+        }
+    };
+    const handleTouchMove = (event) => {
+        if (!event.touches || !event.touches[0] || startY === null) return;
+        const dy = startY - event.touches[0].clientY;
+        const atTop = window.scrollY <= 2;
+        if (body.classList.contains('intro-active')) {
+            event.preventDefault();
+            if (!userInteracted) userInteracted = true;
+            if (scrollInvite) scrollInvite.classList.remove('visible');
+            if (autoPlayTimer) { clearInterval(autoPlayTimer); autoPlaying = false; }
+            updateFromDelta(dy);
+        } else if (body.classList.contains('intro-complete') && atTop && dy < 0) {
+            setIntroState(true);
+            event.preventDefault();
+            updateFromDelta(dy);
+        }
+        startY = event.touches[0].clientY;
+    };
+
+    const preloadAllFrames = () => Promise.all(
+        scrollFrames.map(src => new Promise(resolve => {
+            const img = new Image();
+            img.onload = resolve;
+            img.onerror = resolve;
+            img.src = src;
+        }))
+    );
+
+    const runAutoPlayback = () => {
+        if (autoPlaying || userInteracted || prefersReducedMotion) return;
+        autoPlaying = true;
+        if (scrollInvite) {
+            scrollInvite.textContent = 'Auto-playing intro now. You can scroll up at the top to reverse it.';
+            scrollInvite.classList.add('visible');
+        }
+        autoPlayTimer = setInterval(() => {
+            if (!body.classList.contains('intro-active')) {
+                clearInterval(autoPlayTimer);
+                autoPlaying = false;
+                return;
+            }
+            introProgress = clamp(introProgress + 0.035, 0, 1);
+            setFrameByProgress(introProgress);
+            if (introProgress >= 1) {
+                clearInterval(autoPlayTimer);
+                autoPlaying = false;
+                completeIntro();
+            }
+        }, 90);
+    };
+
+    if (animationEl) {
+        setFrameByProgress(0);
     }
 
-    if (!prefersReducedMotion && animationEl && heroSection) {
-        let lastIndex = -1;
-        let ticking = false;
-
-        const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-        const updateFrame = () => {
-            const rect = heroSection.getBoundingClientRect();
-            const totalScrollable = Math.max(heroSection.offsetHeight * 0.85, 320);
-            const scrolledInsideHero = clamp(-rect.top, 0, totalScrollable);
-            const progress = scrolledInsideHero / totalScrollable;
-            const nextIndex = Math.round(progress * (scrollFrames.length - 1));
-
-            if (nextIndex !== lastIndex) {
-                animationEl.style.backgroundImage = "url('" + scrollFrames[nextIndex] + "')";
-                animationEl.style.opacity = String(0.08 + (progress * 0.08));
-                lastIndex = nextIndex;
+    setIntroState(true);
+    preloadAllFrames().then(() => {
+        body.classList.add('site-loaded');
+        if (prefersReducedMotion) {
+            completeIntro();
+            return;
+        }
+        promptTimer = setTimeout(() => {
+            if (!userInteracted && body.classList.contains('intro-active') && scrollInvite) {
+                scrollInvite.textContent = 'Scroll down to start Orcest intro animation.';
+                scrollInvite.classList.add('visible');
             }
+        }, 7000);
+        autoTriggerTimer = setTimeout(() => {
+            runAutoPlayback();
+        }, 14000);
+    }).catch(() => {
+        body.classList.add('site-loaded');
+        completeIntro();
+    });
 
-            ticking = false;
-        };
-
-        const onScrollOrResize = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updateFrame);
-                ticking = true;
-            }
-        };
-
-        updateFrame();
-        window.addEventListener('scroll', onScrollOrResize, { passive: true });
-        window.addEventListener('resize', onScrollOrResize);
-    } else if (prefersReducedMotion && animationEl) {
-        animationEl.style.backgroundImage = "url('/static/frames/key-frame-100.jpg')";
-    }
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('scroll', () => {
+        if (body.classList.contains('intro-active')) {
+            window.scrollTo({ top: 0, behavior: 'auto' });
+        } else if (window.scrollY > 4 && scrollInvite) {
+            scrollInvite.classList.remove('visible');
+        }
+    }, { passive: true });
+    window.addEventListener('beforeunload', () => {
+        if (promptTimer) clearTimeout(promptTimer);
+        if (autoTriggerTimer) clearTimeout(autoTriggerTimer);
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+    });
 
     // Ensure external links open safely in a new tab.
     document.querySelectorAll('a[href^="http"]').forEach(link => {
@@ -359,7 +479,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 </head>
-<body>
+<body class="intro-active">
+<div class="loader-overlay" id="loader-overlay" aria-live="polite" aria-label="Loading Orcest intro">
+<div class="loader-card">
+<img src="/static/branding/Primary_Logo.svg" alt="Orcest AI">
+<div class="loader-spinner" aria-hidden="true"></div>
+<p class="loader-text">Loading Orcest animation frames...</p>
+</div>
+</div>
 <!-- Navigation -->
 <nav class="nav">
 <div class="nav-container">
@@ -388,6 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="#ecosystem" class="btn-secondary">Explore Ecosystem</a>
 </div>
 <p class="hero-scroll-hint">Scroll down to preview the ecosystem animation frame-by-frame.</p>
+<div id="scroll-invite" class="scroll-invite"></div>
 <div class="hero-stats">
 <div class="stat">
 <span class="stat-number">7+</span>
@@ -404,6 +532,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 </section>
+
+<main class="page-content">
 
 <!-- Ecosystem Section -->
 <section class="ecosystem" id="ecosystem">
@@ -598,7 +728,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="footer-section">
 <h4>Resources</h4>
-<a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">LangChain</a>
+<a href="https://github.com/orcest-ai/orcest.ai" target="_blank" rel="noopener noreferrer">Orcest AI Git</a>
 <a href="https://status.orcest.ai" target="_blank" rel="noopener noreferrer">System Status</a>
 <a href="https://login.orcest.ai" target="_blank" rel="noopener noreferrer">Authentication</a>
 <a href="/api/info">API Documentation</a>
@@ -606,7 +736,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="footer-section">
 <h4>Company</h4>
-<a href="mailto:hello@orcest.ai">Contact Support</a>
+<a href="mailto:info@orcest.ai">Contact Support</a>
 <a href="mailto:admin@danial.ai">CEO: admin@danial.ai</a>
 <a href="https://github.com/orcest-ai" target="_blank" rel="noopener noreferrer">GitHub</a>
 <a href="/metrics">System Metrics</a>
@@ -625,7 +755,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="https://x.com/orcestai" target="_blank" rel="noopener noreferrer">X</a>
 <a href="https://facebook.com/orcest.ai" target="_blank" rel="noopener noreferrer">Facebook</a>
 <a href="https://discord.gg/orcestai" target="_blank" rel="noopener noreferrer">Discord</a>
-<a href="mailto:hello@orcest.ai">Email Us</a>
+<a href="mailto:info@orcest.ai">Email Us</a>
 <a href="https://wa.me/16724729898" target="_blank" rel="noopener noreferrer">WhatsApp</a>
 <a href="https://t.me/orcestai" target="_blank" rel="noopener noreferrer">Telegram Channel</a>
 <a href="https://t.me/orcestai_bot" target="_blank" rel="noopener noreferrer">Telegram Bot</a>
@@ -634,10 +764,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <div class="footer-bottom">
 <p>&copy; 2026 Orcest AI. The Self-Adaptive LLM Orchestrator. Built with ❤️ for developers.</p>
-<p>Support: <a href="mailto:hello@orcest.ai">hello@orcest.ai</a> | Phone: <a href="tel:+16724729898">+1 672 472 9898</a> (Whatsapp, Telegram, Signal) | Status: <a href="https://status.orcest.ai" target="_blank" rel="noopener noreferrer">All Systems Operational</a></p>
+<p>Support: <a href="mailto:info@orcest.ai">info@orcest.ai</a> | Phone: <a href="tel:+16724729898">+1 672 472 9898</a> (Whatsapp, Telegram, Signal) | Status: <a href="https://status.orcest.ai" target="_blank" rel="noopener noreferrer">All Systems Operational</a></p>
 </div>
 </div>
 </footer>
+</main>
 </body>
 </html>"""
 
